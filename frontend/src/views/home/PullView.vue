@@ -9,7 +9,7 @@
     </n-flex>
     <template v-slot:footer>
       <n-flex justify="end">
-        <n-button type="primary" @click="Commit">确 认</n-button>
+        <n-button type="primary" @click="Commit" :loading>确 认</n-button>
       </n-flex>
     </template>
   </n-card>
@@ -24,12 +24,16 @@ import { useAppStore } from '@/stores/appStore'
 const appStore = useAppStore()
 const message= useMessage()
 const remoteURL = ref('')
+const loading = ref(false)
 
 function Commit() {
+  loading.value = true
   GreetService.PullChanges(appStore.directory, remoteURL.value, 'master').then(() => {
     message.success('拉取成功')
   }).catch(() => {
     message.error('拉取失败')
+  }).finally(() => {
+    loading.value = false
   })
 }
 

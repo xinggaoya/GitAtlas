@@ -25,7 +25,7 @@
     </div>
     <template v-slot:footer>
       <n-flex justify="end">
-        <n-button type="primary" @click="Commit">确 认</n-button>
+        <n-button type="primary" @click="Commit" :loading>确 认</n-button>
       </n-flex>
     </template>
   </n-card>
@@ -41,12 +41,16 @@ const appStore = useAppStore()
 const message = useMessage()
 const commitMessage = ref('')
 const updateFiles = ref({})
+const loading = ref(false)
 
 function Commit() {
+  loading.value = true
   GreetService.CommitChanges(appStore.directory, commitMessage.value).then(() => {
     message.success('提交成功')
   }).catch(() => {
     message.error('提交失败')
+  }).finally(() => {
+    loading.value = false
   })
 }
 

@@ -22,7 +22,7 @@
           <CommitView />
         </n-tab-pane>
         <n-tab-pane name="3" tab="推送" :disabled="appStore.remoteUrlList.length == 0">
-          <PullView />
+          <PushView />
         </n-tab-pane>
       </n-tabs>
     </div>
@@ -36,6 +36,7 @@ import { useAppStore } from '@/stores/appStore'
 import InitView from '@/views/home/InitView.vue'
 import PullView from '@/views/home/PullView.vue'
 import CommitView from '@/views/home/CommitView.vue'
+import PushView from '@/views/home/PushView.vue'
 
 const appStore = useAppStore()
 const activeTab = ref('0')

@@ -1,5 +1,5 @@
 <template>
-  <n-card title="推送" :bordered="false" header-style="padding: 0;"
+  <n-card title="推送仓库" :bordered="false" header-style="padding: 0;"
           content-style="padding: 0;height: 100%;" style="height: 100%">
     <n-flex>
       <n-radio-group v-model:value="remoteURL">
@@ -9,7 +9,7 @@
     </n-flex>
     <template v-slot:footer>
       <n-flex justify="end">
-        <n-button type="primary" @click="Commit">确 认</n-button>
+        <n-button type="primary" @click="Commit" :loading>确 认</n-button>
       </n-flex>
     </template>
   </n-card>
@@ -24,13 +24,17 @@ import { useAppStore } from '@/stores/appStore'
 const appStore = useAppStore()
 const message= useMessage()
 const remoteURL = ref('')
+const loading = ref(false)
 
 
 function Commit() {
+  loading.value = true
   GreetService.PushChanges(appStore.directory, remoteURL.value, 'master').then(() => {
-    message.success('拉取成功')
+    message.success('推送成功')
   }).catch(() => {
-    message.error('拉取失败')
+    message.error('推送失败')
+  }).finally(() => {
+    loading.value = false
   })
 }
 
