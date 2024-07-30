@@ -1,0 +1,7 @@
+{
+  "name": "GitAtlas",
+  "company": "Moncn",
+  "version": "1.1.0.1",
+  "icon_path": "..\\build\\icon.ico",
+  "program_path": ".\\GitAtlas.exe"
+}
