@@ -1,0 +1,7 @@
+/.idea
+/.task
+/frontend/node_modules
+/frontend/dist
+/frontend/pnpm-lock.yaml
+/frontend/auto-imports.d.ts
+/frontend/components.d.ts
